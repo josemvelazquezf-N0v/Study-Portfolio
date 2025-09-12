@@ -1,3 +1,4 @@
 Esta es una carpeta dedicada a la materia de Inteligencia Artificial 2025
 Alumno: Jose Manuel Velazquez Fabian
 Reg: 23110161 
+Grupo: 6E
