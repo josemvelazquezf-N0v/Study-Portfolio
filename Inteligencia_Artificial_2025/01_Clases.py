@@ -1,11 +1,9 @@
 # Codigo de ejecucion en terminal: python3 01_Clases.py
 #Asi se hacen las clases en Python
 class Clase(): #
-    def __init__(self): #Constructor de la clase
-    #   Los constructores de una clase son elementos que sirven para al momento de iniciar una clase
-    #   esta pueda declarar variables iniciales, mejor conocidos como artibutos
-        self.atributo_1 = "Valor 1"
-        self.atributo_2 = "Valor 2"
+   
+    atributo_1 = "Valor 1"
+    atributo_2 = "Valor 2"
         
     #   Despues siguen los metodos(funciones de la clase):
     def metodo_1(self): #El self es para referirse a la misma clase, haciendo que los metodos y atributos puedan ser usados
