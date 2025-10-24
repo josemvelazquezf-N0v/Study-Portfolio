@@ -1,6 +1,6 @@
+#Tambien conocido como Uniform Cost Search (UCS)
 
-
-
+#"Este algoritmo busca por costos, no por niveles"
 
 #Este es el grafo que usaremos
 grafo = {
@@ -32,37 +32,40 @@ def Main():
     print("Camino:", camino)     # ['A', 'B', 'C', 'D']
     print("Costo:", costo)       # 4
 
-def ucs_no_informada(grafo, inicio, objetivo):
-    
-    
-    frontera = [(0, inicio)]    #Primero inicia con el costo en 0 y el punto de inicio o (nodo) inicial
-    mejor_costo = {inicio: 0}   #Despues se busca el mejor costo, desde zero e inicio
-    padre = {inicio: None}      #Este guarda el camino que va tomando, desde inicio y ninguno (None) 
-    #No se puede usar "0" en vez de None porque 0 es un valor numerico y no se puede usar con la logica de padres 
-                                
 
+#Esta es la funcion nueva a la que se llama en el Main
+def ucs_no_informada(grafo, inicio, objetivo):  #Aqui se pueden apreciar los parametros quee necesita
+    
+    #Condiciones Iniciales
+    
+    frontera = [(0, inicio)]                    #Primero inicia con el costo en 0 y el punto de inicio o (nodo) inicial
+    mejor_costo = {inicio: 0}                   #Despues se busca el mejor costo, desde zero e inicio
+    padre = {inicio: None}                      #Este guarda el camino que va tomando, desde inicio y ninguno (None) 
+    #No se puede usar "0" en vez de None porque 0 es un valor numerico y no se puede usar con la logica de padres                    
+
+
+#Bucle en donde se realizara la busqueda
     while frontera:
-        costo, nodo = pop_min(frontera)
+        # Sacar el nodo con el costo acumulado más bajo
+        costo, nodo = pop_min(frontera)  #Lo agarra de una lista
 
         # Entradas obsoletas (ya tenemos una mejor)
-        if costo > mejor_costo.get(nodo, float("inf")):
+        if costo > mejor_costo.get(nodo, float("inf")): #Si el costo es mayor al mejor costo guardado, se ignora
             continue
-
         # Si es la meta, este es el camino óptimo (sin heurística y costos >= 0)
         if nodo == objetivo:
-            return reconstruir_camino(padre, objetivo), costo
+            return reconstruir_camino(padre, objetivo), costo   #Se termina la funcion
 
-        # Expandir vecinos
+        #Ahora ve los vecinos del nodo actual
         for vecino, w in grafo.get(nodo, []):
-            if w < 0:
+            if w < 0:   #Condicion de seguridad, solo por si el valor del costo es negativo
                 raise ValueError("UCS requiere costos NO negativos.")
             nuevo = costo + w
-            if nuevo < mejor_costo.get(vecino, float("inf")):
-                mejor_costo[vecino] = nuevo
-                padre[vecino] = nodo
-                frontera.append((nuevo, vecino))
-
-    return None, None
+            if nuevo < mejor_costo.get(vecino, float("inf")):   #Si el costo es mas pequeño que el mejor costo guardado
+                mejor_costo[vecino] = nuevo                     #se cambia el mejor costo
+                padre[vecino] = nodo                            #Se guarda el padre del nodo vecino como el nodo actual
+                frontera.append((nuevo, vecino))                #Se agrega a la frontera el nuevo costo y el vecino
+    return None, None #Si no se encuentra camino, regresa None
 
 def reconstruir_camino(padre, objetivo):
     #Reconstruye el camino usando el mapa de padres.

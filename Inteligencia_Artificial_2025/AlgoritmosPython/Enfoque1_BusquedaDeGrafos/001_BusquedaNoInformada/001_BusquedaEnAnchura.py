@@ -1,3 +1,5 @@
+#Tambien conocido como Breadth-First Search (BFS)
+
 #   Algoritmo de Busqueda en anchura, se usa un valor inicial al azar y se empieza a "Explorar"
 #   en los valores vecinos a el valor inicial, despues se visitan todos los nodos a 2 pasos de distancia
 #   luego se sigue explorando separandose del valor inicial
