@@ -49,7 +49,7 @@ def busqueda_heuristica(grafo, heuristica, inicio, meta):
         print(f"Visitando {nodo_actual} (h={heuristica[nodo_actual]})")
 
         if nodo_actual == meta:
-            print("Meta encontrada ✅")
+            print("Meta encontrada")
             return visitados + [nodo_actual]
 
         visitados.append(nodo_actual)
@@ -69,3 +69,13 @@ meta = 'G'
 camino = busqueda_heuristica(grafo, heuristica, inicio, meta)
 
 print("\nCamino encontrado (orden de visita):", " -> ".join(camino))
+
+
+
+# Asi es como ve el camino, elige el que tenga menor Heuristica
+#     A (7)
+#    / | \
+#  B(6) C(1) D(4)
+#        \
+#         G(0)
+
